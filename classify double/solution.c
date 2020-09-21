@@ -3,11 +3,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-/**
- * Library-level functions.
- * You should use them in the main sections.
- */
-
  /**
  * Library-level functions.
  * You should use them in the main sections.
@@ -43,44 +38,36 @@ bool checkForMinusZero(uint64_t number) {
 }
 
 bool checkForPlusInf(uint64_t number) {
-	/// Your code here.
 	return !getBit(number, 63) & getExponent(number) == 0x7ff & getFraction(number) == 0;
 }
 
 bool checkForMinusInf(uint64_t number) {
-	/// Your code here.
 	return getBit(number, 63) & getExponent(number) == 0x7ff & getFraction(number) == 0;
 }
 
 bool checkForPlusNormal(uint64_t number) {
-	/// Your code here.
-	uint16_t temp = getExponent(number);
-	return !getBit(number, 63) & temp != 0 & temp != 0x7ff;
+	uint16_t exponent = getExponent(number);
+	return !getBit(number, 63) & exponent != 0 & exponent != 0x7ff;
 }
 
 bool checkForMinusNormal(uint64_t number) {
-	/// Your code here.
-	uint16_t temp = getExponent(number);
-	return getBit(number, 63) & temp != 0 & temp != 0x7ff;
+	uint16_t exponent = getExponent(number);
+	return getBit(number, 63) & exponent != 0 & exponent != 0x7ff;
 }
 
 bool checkForPlusDenormal(uint64_t number) {
-	/// Your code here.
 	return !getBit(number, 63) & getExponent(number) == 0 & getFraction(number) != 0;
 }
 
 bool checkForMinusDenormal(uint64_t number) {
-	/// Your code here.
 	return getBit(number, 63) & getExponent(number) == 0 & getFraction(number) != 0;
 }
 
 bool checkForSignalingNan(uint64_t number) {
-	/// Your code here.
 	return getExponent(number) == 0x7ff & getFraction(number) != 0 & !getBit(number, 51);
 }
 
 bool checkForQuietNan(uint64_t number) {
-	/// Your code here.
 	return  getExponent(number) == 0x7ff & getBit(number, 51);
 }
 
