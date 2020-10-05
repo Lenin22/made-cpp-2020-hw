@@ -6,9 +6,19 @@ typedef std::function<int (int)> Op;
 
 
 Op compose (size_t n, Op ops[]) {
-    /// Your code goes here.
-}
+	
+	Op result = [](int x) {	return x; };
 
+	if (n == 0) {
+		return result;
+	}
+
+	while (n-- > 0) {
+		result = [ops, n, result](int x) { return ops[n](result(x)); };
+	}
+	return result;
+
+}
 
 int main () {
     /// Simple tests:
@@ -48,7 +58,7 @@ int main () {
             return 0;
         }
     }
-
+	
     {
         Op ops[0] = {};
         if (compose(0, ops)(4) != 4) {
@@ -56,7 +66,7 @@ int main () {
             return 0;
         }
     }
-
+	
     {
         Op ops[4] = {op2(2), op2(3), op2(4), op2(5)};
         if (compose(4, ops)(1) != 120) {
