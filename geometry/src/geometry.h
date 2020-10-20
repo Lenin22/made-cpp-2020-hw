@@ -165,7 +165,7 @@ double Polygon::area() const {
             (this->points[j].y - this->points[i].y);
     j = i;
   }
-  return abs(surf / 2.0);
+  return fabs(surf / 2.0);
 }
 
 void Polygon::rotate(Point center, double angle) {
@@ -314,7 +314,7 @@ Circle Triangle::inscribedCircle() const {
   double dot = AB.x * AC.x + AB.y * AC.y;
   double phi = acos(dot / (a*c)) / 2;
   double lenAB = sqrt(AB.x*AB.x + AB.y*AB.y);
-  double lenBis = abs(R / sin(phi));
+  double lenBis = fabs(R / sin(phi));
   AB = {AB.x / lenAB * lenBis, AB.y / lenAB * lenBis};
   Point bis = { this->points[0].x + AB.x * cos(phi) - AB.y * sin(phi),
                 this->points[0].y + AB.x * sin(phi) + AB.y * cos(phi) };
